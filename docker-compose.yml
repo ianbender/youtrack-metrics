@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    command: mix do ecto.create, phx.server
+    environment:
+      # Interpolated env vars should be defined in a .env file
+      MIX_ENV: dev
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PG_PASS} 
+      PG_HOST: ${PG_HOST} 
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/opt/youtrack_metrics
