@@ -19,6 +19,12 @@ defmodule YoutrackMetricsWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/api", YoutrackMetricsWeb do
+    pipe_through :api
+
+    post "/", PageController, :create
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", YoutrackMetricsWeb do
   #   pipe_through :api

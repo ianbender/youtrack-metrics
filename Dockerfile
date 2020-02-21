@@ -1,4 +1,8 @@
 # Dockerfile based on https://blog.lelonek.me/how-to-run-phoenix-framework-application-inside-a-docker-container-b02817d860b4
+FROM node:latest
+
+# Install npm packages
+RUN npm install --prefix assets
 
 # Latest version of Erlang-based Elixir installation: https://hub.docker.com/_/elixir/
 FROM elixir:latest
@@ -22,7 +26,10 @@ COPY mix.* ./
 RUN mix deps.compile
 
 # Copy all application files
-COPY . .
+RUN mkdir /app
+WORKDIR /app
+
+COPY . /app
 
 # Compile the entire project
 RUN mix compile
